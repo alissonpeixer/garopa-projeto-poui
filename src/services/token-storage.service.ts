@@ -12,26 +12,26 @@ export class TokenStorageService {
   constructor() { }
 
   signOut(): void {
-    window.localStorage.clear();
+    localStorage.clear();
   }
 
   public saveToken(token: string): void {
-    window.localStorage.removeItem(this.TOKEN_KEY);
-    window.localStorage.setItem(this.TOKEN_KEY, token);
+    localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.setItem(this.TOKEN_KEY, token);
 
   }
 
   public getToken(): string | null {
-    return window.localStorage.getItem(this.TOKEN_KEY);
+    return localStorage.getItem(this.TOKEN_KEY);
   }
 
   public saveRefreshToken(token: string): void {
-    window.localStorage.removeItem(this.REFRESHTOKEN_KEY);
-    window.localStorage.setItem(this.REFRESHTOKEN_KEY, token);
+    localStorage.removeItem(this.REFRESHTOKEN_KEY);
+    localStorage.setItem(this.REFRESHTOKEN_KEY, token);
   }
 
   public getRefreshToken(): string | null {
-    return window.localStorage.getItem(this.REFRESHTOKEN_KEY);
+    return localStorage.getItem(this.REFRESHTOKEN_KEY);
   }
 
   public clearTokens(): void {

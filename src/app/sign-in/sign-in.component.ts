@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../../services/token-storage.service';
 import { Router } from '@angular/router';
 
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +18,7 @@ export class SignInComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private poStorageService :PoStorageService
+    private tokenStorageService: TokenStorageService,
   ) {}
   ngOnInit() {
   }
@@ -26,8 +27,8 @@ export class SignInComponent implements OnInit {
   public submitLogin(row: LoginPage): void {
     this.authService.postLogin(row).subscribe(
       (ret)=> {
-        sessionStorage.setItem('auth-token',ret.items.token);
-        sessionStorage.setItem('auth-refreshtoken',ret.items.refresh_token);
+        this.tokenStorageService.saveToken(ret.items.token);
+        this.tokenStorageService.saveRefreshToken(ret.items.refresh_token);
         this.router.navigateByUrl('/')
       }
     )
