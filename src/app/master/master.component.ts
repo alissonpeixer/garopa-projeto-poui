@@ -14,13 +14,15 @@ export class MasterComponent implements OnInit {
   }
 
   readonly menus: Array<PoMenuItem> = [
-    { label: 'Compras', subItems: [
-        { label: 'Clientes',
+    { label: 'Compras', icon: 'po-icon-handshake',
+      subItems: [
+        {
+          label: 'Clientes', icon: 'po-icon-user',
           subItems: [
-            { label: 'Lista', link:'/compras/cliente' },
+            { label: 'Lista',   link:'/compras/cliente' },
             { label: 'Incluir', link:'/compras/incluir' },
           ]
-         },
+        },
       ]
     }
   ];

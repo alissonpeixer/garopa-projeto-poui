@@ -1,21 +1,35 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ClienteCrud } from '../app/compras/compras-cliente/crud/intereface/cliente-crud';
+import { ClienteCrud, ClienteCrudDto } from '../app/compras/compras-cliente/crud/intereface/cliente-crud';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
 
-  apiUrl = 'http://127.0.0.1:8000/api/clientes/';
+  public readonly apiUrl = `${environment.api}/clientes`;
 
   constructor(
     private httpClient : HttpClient
   ) { }
 
-  postCliente(body: ClienteCrud): Observable<any> {
+  public postCliente(body: ClienteCrud): Observable<ClienteCrudDto> {
     const headers = { 'X-PO-Screen-Lock': 'true' };
-    return this.httpClient.post(`${this.apiUrl}`, body, {headers})
+    return this.httpClient.post<ClienteCrudDto>(`${this.apiUrl}/`, body, {headers});
+  }
+
+  public putCliente(body: ClienteCrud): Observable<ClienteCrudDto> {
+    const headers = { 'X-PO-Screen-Lock': 'true' };
+    return this.httpClient.put<ClienteCrudDto>(`${this.apiUrl}/${body.id}/`,body,{headers});
+  }
+
+  public getClienteById(id: number): Observable<ClienteCrud> {
+    return this.httpClient.get<ClienteCrud>(`${this.apiUrl}/${id}/`);
+  }
+
+  public deleteClienteById(id: number): Observable<any> {
+    return this.httpClient.delete<any>(`${this.apiUrl}/${id}/`);
   }
 }

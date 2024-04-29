@@ -24,6 +24,7 @@
     "@po-ui/ng-components": "^17.7.0",
     "@po-ui/ng-storage": "^17.7.0",
     "@po-ui/ng-templates": "^17.7.0",
+    "@totvs/po-theme": "^17.7.0",
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

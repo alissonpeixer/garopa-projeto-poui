@@ -1,50 +1,62 @@
 <po-page-default
   p-title="Inluir  Cliente"
 >
-<form
-  #formCadastro="ngForm"
-  class="po-row"
->
-<po-input
-  class="po-md-12 po-lg-4"
-  p-label="Nome"
-  p-required
-  [p-show-required]="true"
-  name="nome"
-  [(ngModel)]="dadosClienteCrud.nome"
-></po-input>
-<po-input
-  class="po-md-12 po-lg-4"
-  p-label="CPF/CNPJ"
-  p-required
-  [p-show-required]="true"
-  name="cip"
-  [(ngModel)]="dadosClienteCrud.cip"
-
-></po-input>
-<po-combo
-  name="tipo"
-  [ngModel]="dadosClienteCrud.tipo"
-  [(ngModel)]="dadosClienteCrud.tipo"
-  p-label="Tipo"
-  class="po-md-12 po-lg-4"
-  [p-options]="[
-    { label: 'Fisica', value: 'F' },
-    { label: 'Juridica', value: 'J' },
-  ]"
-  p-placeholder="Selecione"
-  [p-required]="true"
-  [p-show-required]="true"
-></po-combo>
-
-
-</form>
-
-<po-button
-  class="po-md-12 po-mt-3"
+<po-widget class="po-row po-mb-3">
+  <po-button
+  class="po-md-12 po-lg-6 po-mt-3"
   p-kind="primary"
-  p-label="Cadastrar"
+  [p-label]="this.labelButton"
   (p-click)="this.handleSubmit()"
   [p-disabled]="this.formValid()"
 ></po-button>
+@if (this.telaEditar) {
+  <po-button
+    class="po-md-12 po-lg-6 po-mt-3"
+    p-kind="primary"
+    p-label="Excluir"
+    p-danger
+    (p-click)="this.handleRemove()"
+></po-button>
+}
+</po-widget>
+<po-container>
+  <form
+    #formCadastro="ngForm"
+    class="po-row"
+  >
+    <po-input
+      class="po-md-12 po-lg-4"
+      p-label="Nome"
+      p-required
+      [p-show-required]="true"
+      name="nome"
+      [(ngModel)]="dadosClienteCrud.nome"
+    ></po-input>
+    <po-input
+      class="po-md-12 po-lg-4"
+      p-label="CPF/CNPJ"
+      p-required
+      [p-show-required]="true"
+      name="cip"
+      [(ngModel)]="dadosClienteCrud.cip"
+
+    ></po-input>
+    <po-combo
+      name="tipo"
+      [ngModel]="dadosClienteCrud.tipo"
+      [(ngModel)]="dadosClienteCrud.tipo"
+      p-label="Tipo"
+      class="po-md-12 po-lg-4"
+      [p-options]="[
+        { label: 'Fisica', value: 'F' },
+        { label: 'Juridica', value: 'J' },
+      ]"
+      p-placeholder="Selecione"
+      [p-required]="true"
+      [p-show-required]="true"
+      p-clean
+    ></po-combo>
+  </form>
+</po-container>
+
 </po-page-default>
