@@ -2,7 +2,7 @@
   p-title="Clientes"
 >
 <po-table
-  p-service-api="http://127.0.0.1:8000/api/clientes/"
+  [p-service-api]="this.apiEnvironment+'/clientes/'"
   [p-actions]="this.poTableAction"
   [p-height]="500"
   [p-columns]="this.poTableColumn"
