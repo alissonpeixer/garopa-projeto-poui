@@ -1,34 +1,39 @@
-import { ClienteService } from './../../../../services/cliente.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Fornecedor } from '../../../../interface/fornedor';
 import { NgForm } from '@angular/forms';
-import { Cliente } from '../../../../interface/cliente';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FornecedorService } from '../../../../services/fornecedor.service';
+import { environment } from '../../../../environments/environment';
 import { PoBreadcrumb, PoDialogService } from '@po-ui/ng-components';
 
 @Component({
-  selector: 'app-compras-cliente-crud',
-  templateUrl: './compras-cliente-crud.component.html',
-  styleUrls: ['./compras-cliente-crud.component.css']
+  selector: 'app-compras-fornecedor-crud',
+  templateUrl: './compras-fornecedor-crud.component.html',
+  styleUrl: './compras-fornecedor-crud.component.css'
 })
-export class ComprasClienteCrudComponent implements OnInit {
+export class ComprasFornecedorCrudComponent implements OnInit {
 
   public readonly paginaBreadcrumb: PoBreadcrumb;
 
-  public labelButton: string;
+  public dadosFornecedor: Fornecedor;
+
+  public readonly apiEnvironment: string;
   public telaEditar: boolean;
-
-  public dadosClienteCrud: Cliente;
-
+  public labelButton: string;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private clienteService : ClienteService,
     private poDialogService: PoDialogService,
-  ) {
-    this.dadosClienteCrud = new Cliente();
-    this.labelButton = '';
+    private fornecedorService: FornecedorService,
+  ){
+
     this.telaEditar = false;
+    this.labelButton = '';
+    this.apiEnvironment = environment.api;
+
+    this.dadosFornecedor = new Fornecedor();
+
 
     this.paginaBreadcrumb = {
       items: [
@@ -44,6 +49,7 @@ export class ComprasClienteCrudComponent implements OnInit {
   ngOnInit() {
     this.montaTelaCrud();
   }
+
 
   private montaTelaCrud(): void {
     this.activatedRoute.params.subscribe(
@@ -64,15 +70,16 @@ export class ComprasClienteCrudComponent implements OnInit {
     );
   }
 
-  private loadDados(id: number): void {
-    this.clienteService.getClienteById(id).subscribe(
-      (ret)=> (this.dadosClienteCrud = ret)
-    );
-  }
-
-
   public formValid(): boolean {
     return Boolean(this.formCadastro.invalid);
+  }
+
+  private loadDados(ID: string): void {
+    this.fornecedorService.getFornecedorById(ID).subscribe(
+      (ret)=> {
+        this.dadosFornecedor = ret;
+      }
+    );
   }
 
   public handleSubmit(): void {
@@ -81,10 +88,17 @@ export class ComprasClienteCrudComponent implements OnInit {
       message: `Deseja relamente ${this.labelButton} este cadastro?`,
       confirm: ()=> {
         if(this.telaEditar) {
-
-          this.clienteService.putCliente(this.dadosClienteCrud).subscribe(ret=> (this.dadosClienteCrud = ret.items));
+          this.fornecedorService.putFornecedor(this.dadosFornecedor).subscribe(
+            (ret)=> {
+              this.dadosFornecedor = ret.items;
+            }
+          );
         } else {
-          this.clienteService.postCliente(this.dadosClienteCrud).subscribe(ret=> this.router.navigateByUrl('/compras/cliente'));
+          this.fornecedorService.postFornecedor(this.dadosFornecedor).subscribe(
+            (ret)=> {
+              this.goToLista();
+            }
+          );
         }
       }
     });
@@ -95,15 +109,17 @@ export class ComprasClienteCrudComponent implements OnInit {
       title: 'Remover',
       message: 'Deseja relamente remover este cadastro?',
       confirm: ()=> {
-        this.clienteService.deleteClienteById(this.dadosClienteCrud.id).subscribe(ret=> this.router.navigateByUrl('/compras/cliente'));
+        this.fornecedorService.deleteFornecedorById(this.dadosFornecedor.id).subscribe(
+          (ret)=> {
+            this.goToLista();
+          }
+        );
       }
     });
   }
 
-
   private goToLista(): void {
-    this.router.navigate(['compras','cliente']);
+    this.router.navigate(['compras','fornecedor']);
   }
-
 
 }

@@ -1,12 +1,11 @@
 <po-page-default
-  p-title="Clientes - Lista"
+  p-title="Fornecedor - Lista"
   [p-actions]="this.actionsTela"
 >
 <po-table
-  [p-service-api]="this.apiEnvironment+'/cliente/'"
+  [p-service-api]="this.apiEnvironment+'/fornecedor/'"
   [p-actions]="this.actionsTabelaPrincipal"
-  [p-height]="500"
   [p-columns]="this.colunasTabelaPrincipal"
-  p-container
 ></po-table>
 </po-page-default>
+

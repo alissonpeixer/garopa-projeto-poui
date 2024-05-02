@@ -1,0 +1,46 @@
+<po-page-default
+  p-title="Fornecedor - Crud"
+  [p-breadcrumb]="this.paginaBreadcrumb"
+>
+<po-container>
+  <form
+    #formCadastro="ngForm"
+    class="po-row"
+  >
+    <po-input
+    class="po-md-12 po-lg-6"
+    p-label="Nome"
+    p-required
+    [p-show-required]="true"
+    name="nome"
+    [(ngModel)]="this.dadosFornecedor.nome"
+    ></po-input>
+    <po-input
+    class="po-md-12 po-lg-6"
+    p-label="CPF/CNPJ"
+    p-required
+    [p-show-required]="true"
+    name="cip"
+    [(ngModel)]="this.dadosFornecedor.cip"
+
+    ></po-input>
+  </form>
+</po-container>
+<po-widget>
+  <po-button
+    [class]="this.telaEditar  ? 'po-md-12 po-lg-6' : 'po-md-12'"
+    [p-label]="this.labelButton"
+    [p-disabled]="this.formValid()"
+    p-kind="primary"
+    (p-click)="this.handleSubmit()"
+  ></po-button>
+  @if (this.telaEditar) {
+    <po-button
+      p-label="Excluir"
+      p-danger
+      class="po-md-12 po-lg-6"
+      (p-click)="this.handleRemove()"
+    ></po-button>
+  }
+</po-widget>
+</po-page-default>

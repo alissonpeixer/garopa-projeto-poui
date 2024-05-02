@@ -1,24 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { PoPageAction, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
-import { Cliente } from '../../../../interface/cliente';
+
 import { environment } from '../../../../environments/environment';
+import { FornecedorService } from './../../../../services/fornecedor.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Fornecedor } from '../../../../interface/fornedor';
 
 @Component({
-  selector: 'app-compras-cliente-lista',
-  templateUrl: './compras-cliente-lista.component.html',
-  styleUrls: ['./compras-cliente-lista.component.css']
+  selector: 'app-compras-fornecedor-lista',
+  templateUrl: './compras-fornecedor-lista.component.html',
+  styleUrls: ['./compras-fornecedor-lista.component.css']
 })
-export class ComprasClienteListaComponent implements OnInit {
+export class ComprasFornecedorListaComponent implements OnInit {
 
+  public readonly apiEnvironment: string;
   public readonly  actionsTela: Array<PoPageAction>;
   public readonly  actionsTabelaPrincipal: Array<PoTableAction>;
   public readonly  colunasTabelaPrincipal: Array<PoTableColumn>;
-  public readonly  apiEnvironment: string;
 
   constructor(
-    private routers: Router
-  ){
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private fornecedorService: FornecedorService,
+  ) {
+
 
     this.apiEnvironment = environment.api;
 
@@ -34,29 +39,21 @@ export class ComprasClienteListaComponent implements OnInit {
       { property: 'id', label: 'Codigo', type: 'string'    },
       { property: 'nome', label: 'Nome', type: 'string'    },
       { property: 'cip', label: 'CPF/CNPJ', type: 'string' },
-      { property: 'tipo', label: 'Tipo', type: 'subtitle',
-        subtitles: [
-          { value: 'F', label: 'Fisica', content: 'F', color: 'color-01'  },
-          { value: 'J', label: 'Juridica', content: 'J', color: 'color-10'  },
-        ]
-      },
       { property: 'created_at', label: 'Criado em', type: 'date' }
     ];
+
   }
 
   ngOnInit() {
-
   }
 
-  private loadDados(): void {
-
-  }
 
   private goToIncluir(): void {
-    this.routers.navigate(['compras','cliente','incluir'])
+    this.router.navigate(['compras','fornecedor','incluir'])
   }
-  private goToRegistro(row: Cliente): void {
-    this.routers.navigate(['compras','cliente','editar',row.id])
+
+  private goToRegistro(row: Fornecedor): void {
+    this.router.navigate(['compras','fornecedor','editar',row.id])
   }
 
 }

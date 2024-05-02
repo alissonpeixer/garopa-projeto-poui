@@ -1,4 +1,4 @@
 export const environment = {
-  api: 'https://api.alissonpeixer.com/api',
-  auth: 'https://api.alissonpeixer.com/auth'
+  api: 'http://localhost:8000/api',
+  auth: 'http://localhost:8000/auth'
 };

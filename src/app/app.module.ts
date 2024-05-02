@@ -16,6 +16,8 @@ import { AuthInterceptor } from './auth/authInterceptor.guard';
 import { ComprasClienteListaComponent } from './compras/compras-cliente/lista/compras-cliente-lista.component';
 import { ComprasClienteCrudComponent } from './compras/compras-cliente/crud/compras-cliente-crud.component';
 import { FormsModule } from '@angular/forms';
+import { ComprasFornecedorCrudComponent } from './compras/compras-fornecedor/crud/compras-fornecedor-crud.component';
+import { ComprasFornecedorListaComponent } from './compras/compras-fornecedor/lista/compras-fornecedor-lista.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { FormsModule } from '@angular/forms';
     MasterComponent,
     SignInComponent,
     ComprasClienteListaComponent,
-    ComprasClienteCrudComponent
+    ComprasClienteCrudComponent,
+    ComprasFornecedorCrudComponent,
+    ComprasFornecedorListaComponent
   ],
   imports: [
     BrowserModule,

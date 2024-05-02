@@ -21,24 +21,35 @@ export class MasterComponent implements OnInit {
     private poDialogService: PoDialogService,
     private tokenStorageService: TokenStorageService,
   ){
+
     this.poProfileAction = [
       { label: 'Sair', icon:'po-icon-exit', type: 'danger', action: this.userLogout.bind(this) },
     ];
 
-
     this.poMenuItem = [
-      { label: 'Compras', icon: 'po-icon-handshake',
+      {
+        label: 'Compras',
+        icon: 'po-icon-handshake',
         subItems: [
           {
-            label: 'Clientes', icon: 'po-icon-user',
+            label: 'Clientes',
+            icon: 'po-icon-user',
             subItems: [
               { label: 'Lista',   link:'/compras/cliente' },
-              { label: 'Incluir', link:'/compras/incluir' },
+              { label: 'Incluir', link:'/compras/cliente/incluir' },
             ]
           },
+          {
+            label: 'Fornecedor',
+            subItems: [
+              { label: 'Lista',   link:'/compras/fornecedor' },
+              { label: 'Incluir', link:'/compras/fornecedor/incluir' },
+            ]
+          }
         ]
-      }
+      },
     ];
+
   }
 
   ngOnInit() {

@@ -1,24 +1,7 @@
 <po-page-default
-  p-title="Inluir  Cliente"
+  p-title="Cliente - Crud"
+  [p-breadcrumb]="this.paginaBreadcrumb"
 >
-<po-widget class="po-row po-mb-3">
-  <po-button
-  class="po-md-12 po-lg-6 po-mt-3"
-  p-kind="primary"
-  [p-label]="this.labelButton"
-  (p-click)="this.handleSubmit()"
-  [p-disabled]="this.formValid()"
-></po-button>
-@if (this.telaEditar) {
-  <po-button
-    class="po-md-12 po-lg-6 po-mt-3"
-    p-kind="primary"
-    p-label="Excluir"
-    p-danger
-    (p-click)="this.handleRemove()"
-></po-button>
-}
-</po-widget>
 <po-container>
   <form
     #formCadastro="ngForm"
@@ -27,7 +10,7 @@
     <po-input
       class="po-md-12 po-lg-4"
       p-label="Nome"
-      p-required
+
       [p-show-required]="true"
       name="nome"
       [(ngModel)]="dadosClienteCrud.nome"
@@ -35,7 +18,7 @@
     <po-input
       class="po-md-12 po-lg-4"
       p-label="CPF/CNPJ"
-      p-required
+
       [p-show-required]="true"
       name="cip"
       [(ngModel)]="dadosClienteCrud.cip"
@@ -58,5 +41,23 @@
     ></po-combo>
   </form>
 </po-container>
+<po-widget class="po-row po-mb-3">
+  <po-button
+  [class]="this.telaEditar  ? 'po-md-12 po-lg-6' : 'po-md-12'"
+  p-kind="primary"
+  [p-label]="this.labelButton"
+  (p-click)="this.handleSubmit()"
+  [p-disabled]="this.formValid()"
+></po-button>
+@if (this.telaEditar) {
+  <po-button
+    class="po-md-12 po-lg-6"
+    p-kind="primary"
+    p-label="Excluir"
+    p-danger
+    (p-click)="this.handleRemove()"
+></po-button>
+}
+</po-widget>
 
 </po-page-default>

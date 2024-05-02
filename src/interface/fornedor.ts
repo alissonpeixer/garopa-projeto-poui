@@ -1,12 +1,11 @@
-export interface ClienteCrudDto {
-  items: ClienteCrud;
+export interface FornecedorDto {
+  items: Fornecedor;
 }
 
-export class ClienteCrud {
+export class Fornecedor {
   id: number;
   nome: string;
   cip:  string;
-  tipo: string;
   url: string;
   created_at: string;
 
@@ -14,7 +13,6 @@ export class ClienteCrud {
     this.id = 0;
     this.cip = '',
     this.nome = '';
-    this.tipo = '';
     this.url = '';
     this.created_at = '';
   }
