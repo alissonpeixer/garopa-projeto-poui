@@ -7,7 +7,8 @@ import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-compras-cliente-lista',
   templateUrl: './compras-cliente-lista.component.html',
-  styleUrls: ['./compras-cliente-lista.component.css']
+  styleUrls: ['./compras-cliente-lista.component.css'],
+  standalone: false
 })
 export class ComprasClienteListaComponent implements OnInit {
 

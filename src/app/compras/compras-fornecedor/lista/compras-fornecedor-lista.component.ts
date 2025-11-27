@@ -9,7 +9,8 @@ import { Fornecedor } from '../../../../interface/fornedor';
 @Component({
   selector: 'app-compras-fornecedor-lista',
   templateUrl: './compras-fornecedor-lista.component.html',
-  styleUrls: ['./compras-fornecedor-lista.component.css']
+  styleUrls: ['./compras-fornecedor-lista.component.css'],
+  standalone: false
 })
 export class ComprasFornecedorListaComponent implements OnInit {
 

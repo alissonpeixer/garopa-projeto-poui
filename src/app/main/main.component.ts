@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { TokenStorageService } from '../../services/token-storage.service';
 
 @Component({
-  selector: 'app-master',
-  templateUrl: './master.component.html',
-  styleUrl: './master.component.css'
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrl: './main.component.css',
+  standalone: false
 })
-export class MasterComponent implements OnInit {
+export class MainComponent implements OnInit {
 
 
   public readonly poMenuItem: Array<PoMenuItem>;

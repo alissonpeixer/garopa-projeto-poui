@@ -9,7 +9,8 @@ import { PoBreadcrumb, PoDialogService } from '@po-ui/ng-components';
 @Component({
   selector: 'app-compras-fornecedor-crud',
   templateUrl: './compras-fornecedor-crud.component.html',
-  styleUrl: './compras-fornecedor-crud.component.css'
+  styleUrl: './compras-fornecedor-crud.component.css',
+  standalone: false
 })
 export class ComprasFornecedorCrudComponent implements OnInit {
 

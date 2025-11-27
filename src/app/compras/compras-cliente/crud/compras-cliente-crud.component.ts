@@ -8,7 +8,8 @@ import { PoBreadcrumb, PoDialogService } from '@po-ui/ng-components';
 @Component({
   selector: 'app-compras-cliente-crud',
   templateUrl: './compras-cliente-crud.component.html',
-  styleUrls: ['./compras-cliente-crud.component.css']
+  styleUrls: ['./compras-cliente-crud.component.css'],
+  standalone: false
 })
 export class ComprasClienteCrudComponent implements OnInit {
 

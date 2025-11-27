@@ -1,5 +1,5 @@
 import { Routes } from "@angular/router";
-import { MasterComponent } from "./master/master.component";
+import { MainComponent } from "./main/main.component";
 import { SignInComponent } from "./sign-in/sign-in.component";
 import { AuthGuard } from "./auth/auth.guard";
 
@@ -12,7 +12,7 @@ import { ComprasFornecedorListaComponent } from "./compras/compras-fornecedor/li
 
 export const routers : Routes = [
   { path: 'login'      , component: SignInComponent, canActivate: [ AuthGuard ]   },
-  { path: ''         , component: MasterComponent, canActivate: [ AuthGuard ],
+  { path: ''         , component: MainComponent, canActivate: [ AuthGuard ],
     children: [
       { path: 'compras/cliente', component: ComprasClienteListaComponent },
       { path: 'compras/cliente/incluir', component: ComprasClienteCrudComponent },
