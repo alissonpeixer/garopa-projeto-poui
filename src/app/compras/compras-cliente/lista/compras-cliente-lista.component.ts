@@ -1,3 +1,4 @@
+import { ClienteService } from './../../../../services/cliente.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PoPageAction, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
@@ -12,51 +13,51 @@ import { environment } from '../../../../environments/environment';
 })
 export class ComprasClienteListaComponent implements OnInit {
 
-  public readonly  actionsTela: Array<PoPageAction>;
-  public readonly  actionsTabelaPrincipal: Array<PoTableAction>;
-  public readonly  colunasTabelaPrincipal: Array<PoTableColumn>;
-  public readonly  apiEnvironment: string;
+  tabelaPrincipalDados: Array<Cliente> = [];
 
   constructor(
-    private routers: Router
-  ){
+    private routers: Router,
+    private clienteService: ClienteService
+  ){}
 
-    this.apiEnvironment = environment.api;
+  public readonly actionsTela: Array<PoPageAction> = [
+    { label: 'Incluir', action: this.goToIncluir.bind(this) }
+  ];
 
-    this.actionsTela = [
-      { label: 'Incluir', action: this.goToIncluir.bind(this) }
-    ];
+  public readonly tabelaPrincipalActions: Array<PoTableAction> = [
+    { label: 'Editar', action: this.goToRegistro.bind(this) }
+  ];
 
-    this.actionsTabelaPrincipal = [
-      { label: 'Editar', action: this.goToRegistro.bind(this) }
-    ];
-
-    this.colunasTabelaPrincipal = [
-      { property: 'id', label: 'Codigo', type: 'string'    },
-      { property: 'nome', label: 'Nome', type: 'string'    },
-      { property: 'cip', label: 'CPF/CNPJ', type: 'string' },
-      { property: 'tipo', label: 'Tipo', type: 'subtitle',
-        subtitles: [
-          { value: 'F', label: 'Fisica', content: 'F', color: 'color-01'  },
-          { value: 'J', label: 'Juridica', content: 'J', color: 'color-10'  },
-        ]
-      },
-      { property: 'created_at', label: 'Criado em', type: 'date' }
-    ];
-  }
+  public readonly tabelaPrincipalColumns: Array<PoTableColumn> = [
+    { property: 'id', label: 'Codigo', type: 'string'    },
+    { property: 'nome', label: 'Nome', type: 'string'    },
+    { property: 'cip', label: 'CPF/CNPJ', type: 'string' },
+    { property: 'tipo', label: 'Tipo', type: 'subtitle',
+      subtitles: [
+        { value: 'F', label: 'Fisica', content: 'F', color: 'color-01'  },
+        { value: 'J', label: 'Juridica', content: 'J', color: 'color-10'  },
+      ]
+    },
+    { property: 'created_at', label: 'Criado em', type: 'date' }
+  ];
 
   ngOnInit() {
-
+    this.loadDados();
   }
 
-  private loadDados(): void {
-
+  loadDados(): void {
+    this.clienteService.getClienteLista().subscribe(
+      (ret)=> {
+        this.tabelaPrincipalDados = ret.items;
+      }
+    );
   }
 
-  private goToIncluir(): void {
+  goToIncluir(): void {
     this.routers.navigate(['compras','cliente','incluir'])
   }
-  private goToRegistro(row: Cliente): void {
+
+  goToRegistro(row: Cliente): void {
     this.routers.navigate(['compras','cliente','editar',row.id])
   }
 

@@ -1,6 +1,13 @@
 export interface ClienteDto {
   items: Cliente;
+  hasNext: boolean;
 }
+
+export interface ClienteListaDto {
+  items: Array<Cliente>;
+  hasNext: boolean;
+}
+
 
 export class Cliente {
   id: number;

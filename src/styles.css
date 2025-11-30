@@ -1,1 +1,125 @@
-/* You can add global styles to this file, and also import other style files */
+/* ============================================================
+   TEMA "MODERN OS" (Win11 / macOS Style)
+   ============================================================ */
+
+:root {
+  /* --- 1. Base e Tipografia --- */
+  --font-family: 'Segoe UI', 'San Francisco', 'Helvetica Neue', sans-serif; /* Fontes nativas do sistema */
+  --font-size: 14px !important;
+
+  /* Cor de fundo da página (Cinza muito leve para destacar os cards brancos) */
+  --color-page-background-color-page: #f3f4f6 !important;
+
+  /* --- 2. Variáveis de Arredondamento (Radius) --- */
+  /* PO UI usa essas variáveis internamente */
+  --border-radius-sm: 6px !important;
+  --border-radius-md: 8px !important;  /* Inputs e Botões */
+  --border-radius-lg: 16px !important; /* Cards e Modais */
+}
+
+/* ============================================================
+   COMPONENTES GERAIS
+   ============================================================ */
+
+/* Inputs, Selects e Combos mais redondos e "clean" */
+input.po-input,
+select.po-select,
+.po-combo-input,
+.po-datepicker-input,
+.po-textarea {
+  border-radius: 8px !important;
+  border: 1px solid #e0e0e0 !important;
+  background-color: rgba(255, 255, 255, 0.8) !important; /* Levemente transparente */
+  transition: all 0.3s ease;
+}
+
+/* Efeito de foco estilo Windows 11 (Borda suave colorida) */
+input.po-input:focus,
+select.po-select:focus {
+  border-color: var(--color-brand-01-base) !important;
+  box-shadow: 0 0 0 4px rgba(var(--color-brand-01-base-rgb), 0.15) !important;
+}
+
+/* Botões totalmente arredondados (Pill shape ou Rounded Rect) */
+po-button button {
+  border-radius: 8px !important; /* Windows 11 usa 4px a 8px, Mac usa Pill. 8px é um bom meio termo */
+  font-weight: 600 !important;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Sombra sutil no botão */
+}
+
+/* ============================================================
+   MENU LATERAL (GLASSMORPHISM)
+   ============================================================ */
+po-menu {
+  /* Se possível, deixar o menu flutuante ou com vidro */
+  box-shadow: 4px 0 24px rgba(0,0,0,0.04) !important;
+}
+
+/* Item do menu selecionado */
+.po-menu-item-link-active {
+  background-color: rgba(var(--color-brand-01-base-rgb), 0.1) !important; /* Tintura da cor da marca */
+  border-left: 4px solid var(--color-brand-01-base) !important;
+  border-radius: 0 8px 8px 0 !important; /* Canto arredondado só na direita */
+  font-weight: bold !important;
+}
+
+/* ============================================================
+   CARDS E CONTEINERES (A MÁGICA ACONTECE AQUI)
+   ============================================================ */
+
+/* Crie classes utilitárias para usar no seu HTML */
+
+/* Card Estilo Windows 11 / Mac */
+.modern-card {
+  background: #ffffff;
+  border-radius: 16px; /* Borda bem redonda */
+  padding: 24px;
+
+  /* Sombra difusa e elegante (sem preto chapado) */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05),
+              0 1px 3px rgba(0, 0, 0, 0.02);
+
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Borda interna sutil */
+  margin-bottom: 20px;
+}
+
+/* Efeito de Vidro (Para Modais ou Headers fixos) */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px); /* O desfoque estilo Mac/Win */
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================================
+   MODAIS E POPUPS
+   ============================================================ */
+.po-modal-content {
+  border-radius: 16px !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15) !important; /* Sombra profunda para dar destaque */
+}
+
+.po-modal-header {
+  border-radius: 16px 16px 0 0 !important;
+  background-color: #f9fafb !important; /* Cabeçalho levemente cinza */
+}
+
+/* ============================================================
+   SCROLLBAR INVISÍVEL/FLUTUANTE (Mantenha o anterior ou use este)
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}

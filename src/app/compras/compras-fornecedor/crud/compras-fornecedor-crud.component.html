@@ -1,46 +1,42 @@
-<po-page-default
-  p-title="Fornecedor - Crud"
-  [p-breadcrumb]="this.paginaBreadcrumb"
->
-<po-container>
-  <form
-    #formCadastro="ngForm"
-    class="po-row"
-  >
-    <po-input
-    class="po-md-12 po-lg-6"
-    p-label="Nome"
-    p-required
-    [p-show-required]="true"
-    name="nome"
-    [(ngModel)]="this.dadosFornecedor.nome"
-    ></po-input>
-    <po-input
-    class="po-md-12 po-lg-6"
-    p-label="CPF/CNPJ"
-    p-required
-    [p-show-required]="true"
-    name="cip"
-    [(ngModel)]="this.dadosFornecedor.cip"
-
-    ></po-input>
-  </form>
-</po-container>
-<po-widget>
-  <po-button
-    [class]="this.telaEditar  ? 'po-md-12 po-lg-6' : 'po-md-12'"
-    [p-label]="this.labelButton"
-    [p-disabled]="this.formValid()"
-    p-kind="primary"
-    (p-click)="this.handleSubmit()"
-  ></po-button>
-  @if (this.telaEditar) {
+<po-page-default p-title="Fornecedor - Crud"[p-breadcrumb]="paginaBreadcrumb">
+  <po-widget class="po-md-12 po-mt-4">
+    <form #formCadastro="ngForm" class="po-row">
+      <po-input
+        class="po-md-12 po-lg-6"
+        p-label="Nome"
+        p-required
+        [p-show-required]="true"
+        name="nome"
+        [(ngModel)]="dadosFornecedor.nome"
+      ></po-input>
+      <po-input
+        class="po-md-12 po-lg-6"
+        p-label="CPF/CNPJ"
+        p-required
+        [p-show-required]="true"
+        name="cip"
+        [(ngModel)]="dadosFornecedor.cip"
+      ></po-input>
+    </form>
+  </po-widget>
+  <po-widget class="po-md-12 po-mt-4">
     <po-button
-      p-label="Excluir"
-      p-danger
-      class="po-md-12 po-lg-6"
-      (p-click)="this.handleRemove()"
+      p-kind="primary"
+      p-icon="an an-arrow-clockwise"
+      [class]="telaEditar  ? 'po-md-12 po-lg-6' : 'po-md-12'"
+      [p-label]="labelButton"
+      [p-disabled]="!formCadastro.valid"
+      (p-click)="handleSubmit()"
     ></po-button>
-  }
-</po-widget>
+    @if (telaEditar) {
+      <po-button
+        class="po-md-12 po-lg-6"
+        p-kind="primary"
+        p-label="Excluir"
+        p-icon="an an-trash"
+        [p-danger]="true"
+        (p-click)="handleRemove()"
+      ></po-button>
+    }
+  </po-widget>
 </po-page-default>

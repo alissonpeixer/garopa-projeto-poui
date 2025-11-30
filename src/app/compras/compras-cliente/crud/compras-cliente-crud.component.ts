@@ -13,34 +13,26 @@ import { PoBreadcrumb, PoDialogService } from '@po-ui/ng-components';
 })
 export class ComprasClienteCrudComponent implements OnInit {
 
-  public readonly paginaBreadcrumb: PoBreadcrumb;
-
-  public labelButton: string;
-  public telaEditar: boolean;
-
-  public dadosClienteCrud: Cliente;
-
+  labelButton: string = '';
+  telaEditar: boolean = false;
+  dadosClienteCrud: Cliente = new Cliente();
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private clienteService : ClienteService,
     private poDialogService: PoDialogService,
-  ) {
-    this.dadosClienteCrud = new Cliente();
-    this.labelButton = '';
-    this.telaEditar = false;
-
-    this.paginaBreadcrumb = {
-      items: [
-        { label: 'Compras' },
-        { label: 'Fornecedor - Lista', action: this.goToLista.bind(this) },
-        { label: 'Crud' }
-      ]
-    }
-  }
+  ) {}
 
   @ViewChild('formCadastro', {static: true}) formCadastro! : NgForm
+
+  public readonly paginaBreadcrumb: PoBreadcrumb = {
+    items: [
+      { label: 'Compras' },
+      { label: 'Cliente - Lista', action: this.goToLista.bind(this) },
+      { label: 'Crud' }
+    ]
+  };
 
   ngOnInit() {
     this.montaTelaCrud();
@@ -65,18 +57,18 @@ export class ComprasClienteCrudComponent implements OnInit {
     );
   }
 
-  private loadDados(id: number): void {
+  loadDados(id: number): void {
     this.clienteService.getClienteById(id).subscribe(
       (ret)=> (this.dadosClienteCrud = ret)
     );
   }
 
 
-  public formValid(): boolean {
+  formValid(): boolean {
     return Boolean(this.formCadastro.invalid);
   }
 
-  public handleSubmit(): void {
+  handleSubmit(): void {
     this.poDialogService.confirm({
       title: `${this.labelButton} `,
       message: `Deseja relamente ${this.labelButton} este cadastro?`,
@@ -91,7 +83,7 @@ export class ComprasClienteCrudComponent implements OnInit {
     });
   }
 
-  public handleRemove(): void {
+  handleRemove(): void {
     this.poDialogService.confirm({
       title: 'Remover',
       message: 'Deseja relamente remover este cadastro?',
@@ -102,7 +94,7 @@ export class ComprasClienteCrudComponent implements OnInit {
   }
 
 
-  private goToLista(): void {
+  goToLista(): void {
     this.router.navigate(['compras','cliente']);
   }
 

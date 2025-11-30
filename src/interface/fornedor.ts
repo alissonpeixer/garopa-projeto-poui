@@ -2,6 +2,12 @@ export interface FornecedorDto {
   items: Fornecedor;
 }
 
+export interface FornecedorListaDto {
+  items: Array<Fornecedor>;
+  hasNext: boolean;
+}
+
+
 export class Fornecedor {
   id: number;
   nome: string;

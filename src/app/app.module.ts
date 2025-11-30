@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AuthGuard } from "./auth/auth.guard";
 import { Routes } from "@angular/router";
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PoModule } from '@po-ui/ng-components';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -49,13 +48,12 @@ const routers : Routes = [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     PoModule,
     HttpClientModule,
     RouterModule.forRoot(routers),
     PoTemplatesModule,
     PoStorageModule.forRoot({
-      name: 'central',
+      name: 'garopa',
       storeName: '_mystore',
       driverOrder: ['lokijs', 'websql', 'indexeddb', 'localstorage']
     }),

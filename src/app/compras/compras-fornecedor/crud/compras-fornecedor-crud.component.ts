@@ -3,7 +3,6 @@ import { Fornecedor } from '../../../../interface/fornedor';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FornecedorService } from '../../../../services/fornecedor.service';
-import { environment } from '../../../../environments/environment';
 import { PoBreadcrumb, PoDialogService } from '@po-ui/ng-components';
 
 @Component({
@@ -14,45 +13,34 @@ import { PoBreadcrumb, PoDialogService } from '@po-ui/ng-components';
 })
 export class ComprasFornecedorCrudComponent implements OnInit {
 
-  public readonly paginaBreadcrumb: PoBreadcrumb;
+  dadosFornecedor:Fornecedor = new Fornecedor();
 
-  public dadosFornecedor: Fornecedor;
-
-  public readonly apiEnvironment: string;
-  public telaEditar: boolean;
-  public labelButton: string;
+  telaEditar: boolean = false;
+  labelButton: string = '';
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private poDialogService: PoDialogService,
     private fornecedorService: FornecedorService,
-  ){
-
-    this.telaEditar = false;
-    this.labelButton = '';
-    this.apiEnvironment = environment.api;
-
-    this.dadosFornecedor = new Fornecedor();
-
-
-    this.paginaBreadcrumb = {
-      items: [
-        { label: 'Compras' },
-        { label: 'Fornecedor - Lista', action: this.goToLista.bind(this) },
-        { label: 'Crud' }
-      ]
-    }
-  }
+  ){}
 
   @ViewChild('formCadastro', {static: true}) formCadastro! : NgForm
+
+  public readonly paginaBreadcrumb: PoBreadcrumb = {
+    items: [
+      { label: 'Compras' },
+      { label: 'Fornecedor - Lista', action: this.goToLista.bind(this) },
+      { label: 'Crud' }
+    ]
+  }
 
   ngOnInit() {
     this.montaTelaCrud();
   }
 
 
-  private montaTelaCrud(): void {
+  montaTelaCrud(): void {
     this.activatedRoute.params.subscribe(
       (ret)=> {
         if(ret['TIPO'] === 'editar' && ret['ID']){
@@ -71,11 +59,7 @@ export class ComprasFornecedorCrudComponent implements OnInit {
     );
   }
 
-  public formValid(): boolean {
-    return Boolean(this.formCadastro.invalid);
-  }
-
-  private loadDados(ID: string): void {
+  loadDados(ID: string): void {
     this.fornecedorService.getFornecedorById(ID).subscribe(
       (ret)=> {
         this.dadosFornecedor = ret;
@@ -83,7 +67,7 @@ export class ComprasFornecedorCrudComponent implements OnInit {
     );
   }
 
-  public handleSubmit(): void {
+  handleSubmit(): void {
     this.poDialogService.confirm({
       title: `${this.labelButton} `,
       message: `Deseja relamente ${this.labelButton} este cadastro?`,
@@ -105,7 +89,7 @@ export class ComprasFornecedorCrudComponent implements OnInit {
     });
   }
 
-  public handleRemove(): void {
+  handleRemove(): void {
     this.poDialogService.confirm({
       title: 'Remover',
       message: 'Deseja relamente remover este cadastro?',
@@ -119,7 +103,11 @@ export class ComprasFornecedorCrudComponent implements OnInit {
     });
   }
 
-  private goToLista(): void {
+  formValid(): boolean {
+    return Boolean(this.formCadastro.invalid);
+  }
+
+  goToLista(): void {
     this.router.navigate(['compras','fornecedor']);
   }
 

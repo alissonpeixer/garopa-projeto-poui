@@ -14,46 +14,47 @@ import { Fornecedor } from '../../../../interface/fornedor';
 })
 export class ComprasFornecedorListaComponent implements OnInit {
 
-  public readonly apiEnvironment: string;
-  public readonly  actionsTela: Array<PoPageAction>;
-  public readonly  actionsTabelaPrincipal: Array<PoTableAction>;
-  public readonly  colunasTabelaPrincipal: Array<PoTableColumn>;
+  tabelaPrincipalDados: Array<Fornecedor> = [];
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private fornecedorService: FornecedorService,
-  ) {
+  ) {}
 
+  public readonly actionsTela: Array<PoPageAction> = [
+    { label: 'Incluir', action: this.goToIncluir.bind(this) }
+  ];
 
-    this.apiEnvironment = environment.api;
+  public readonly tabelaPrincipalActions: Array<PoTableAction> = [
+    { label: 'Editar', action: this.goToRegistro.bind(this) }
+  ];
 
-    this.actionsTela = [
-      { label: 'Incluir', action: this.goToIncluir.bind(this) }
-    ];
+  public readonly tabelaPrincipalColumns: Array<PoTableColumn> = [
+    { property: 'id', label: 'Codigo', type: 'string'    },
+    { property: 'nome', label: 'Nome', type: 'string'    },
+    { property: 'cip', label: 'CPF/CNPJ', type: 'string' },
+    { property: 'created_at', label: 'Criado em', type: 'date' }
+  ];
 
-    this.actionsTabelaPrincipal = [
-      { label: 'Editar', action: this.goToRegistro.bind(this) }
-    ];
-
-    this.colunasTabelaPrincipal = [
-      { property: 'id', label: 'Codigo', type: 'string'    },
-      { property: 'nome', label: 'Nome', type: 'string'    },
-      { property: 'cip', label: 'CPF/CNPJ', type: 'string' },
-      { property: 'created_at', label: 'Criado em', type: 'date' }
-    ];
-
-  }
 
   ngOnInit() {
+    this.loadDados();
   }
 
+  loadDados(): void {
+    this.fornecedorService.getFornecedor().subscribe(
+      (res)=> {
+        this.tabelaPrincipalDados = res.items;
+      }
+    );
+  }
 
-  private goToIncluir(): void {
+  goToIncluir(): void {
     this.router.navigate(['compras','fornecedor','incluir'])
   }
 
-  private goToRegistro(row: Fornecedor): void {
+  goToRegistro(row: Fornecedor): void {
     this.router.navigate(['compras','fornecedor','editar',row.id])
   }
 

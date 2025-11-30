@@ -1,12 +1,7 @@
-<po-page-default
-  p-title="Cliente - Crud"
-  [p-breadcrumb]="this.paginaBreadcrumb"
->
-<po-container>
-  <form
-    #formCadastro="ngForm"
-    class="po-row"
-  >
+<po-page-default p-title="Cliente - Crud" [p-breadcrumb]="paginaBreadcrumb">
+
+<po-widget class="po-row po-mb-12 po-xl-12">
+  <form #formCadastro="ngForm" class="po-row">
     <po-input
       class="po-md-12 po-lg-4"
       p-label="Nome"
@@ -40,24 +35,27 @@
       p-clean
     ></po-combo>
   </form>
-</po-container>
-<po-widget class="po-row po-mb-3">
+</po-widget>
+
+<po-widget class="po-row po-mb-12 po-xl-12 po-mt-2">
   <po-button
-  [class]="this.telaEditar  ? 'po-md-12 po-lg-6' : 'po-md-12'"
-  p-kind="primary"
-  [p-label]="this.labelButton"
-  (p-click)="this.handleSubmit()"
-  [p-disabled]="this.formValid()"
-></po-button>
-@if (this.telaEditar) {
-  <po-button
-    class="po-md-12 po-lg-6"
+    [class]="telaEditar  ? 'po-md-12 po-lg-6' : 'po-md-12'"
     p-kind="primary"
-    p-label="Excluir"
-    p-danger
-    (p-click)="this.handleRemove()"
-></po-button>
-}
+    [p-label]="labelButton"
+    (p-click)="handleSubmit()"
+    [p-disabled]="formValid()"
+    p-icon="an an-arrow-clockwise"
+  ></po-button>
+  @if (telaEditar) {
+    <po-button
+      class="po-md-12 po-lg-6"
+      p-kind="primary"
+      p-label="Excluir"
+      p-icon="an an-trash"
+      p-danger
+      (p-click)="handleRemove()"
+    ></po-button>
+  }
 </po-widget>
 
 </po-page-default>
